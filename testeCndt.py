@@ -10,7 +10,7 @@ imagem_bytes = [
 imagem_bytes = bytes([(b + 256) % 256 for b in imagem_bytes])
 
 # Define o caminho para salvar a imagem
-caminho = "C:/CAMINHO/imagem_captcha.png"
+caminho = "C:/Users/Usuario/Downloads/testecndt/imagem_captcha.png"
 
 # Salva o arquivo
 with open(caminho, "wb") as img_file:

@@ -1,10 +1,13 @@
 import cv2
 import numpy as np
-import easyocr
+import pytesseract
+
+# Especifique o caminho completo para o executável do Tesseract
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Caminho para a imagem captcha
-caminho_imagem = "C:/CAMINHO/imagem_captcha.png"
-caminho_imagem_processada = "C:/CAMINHO/imagem_captcha_processada.png"
+caminho_imagem = "C:/Users/Usuario/Downloads/testecndt/imagem_captcha.png"
+caminho_imagem_processada = "C:/Users/Usuario/Downloads/testecndt/imagem_captcha_processada.png"
 
 # Carregar imagem em escala de cinza
 imagem = cv2.imread(caminho_imagem, cv2.IMREAD_GRAYSCALE)
@@ -29,12 +32,8 @@ imagem = cv2.bitwise_not(imagem)
 cv2.imwrite(caminho_imagem_processada, imagem)
 print(f"Imagem processada salva em: {caminho_imagem_processada}")
 
-# Inicializar o leitor EasyOCR
-reader = easyocr.Reader(['en'])
+# Realizar OCR com Tesseract
+custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
+texto = pytesseract.image_to_string(imagem, config=custom_config)
 
-# Realizar OCR na imagem
-resultado = reader.readtext(imagem)
-
-# Extrair o texto detectado
-texto = ' '.join([res[1] for res in resultado])
 print("Texto detectado:", texto)

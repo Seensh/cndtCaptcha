@@ -2,3 +2,4 @@ easyocr
 torch
 opencv-python
 numpy
+speechrecognition
